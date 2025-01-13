@@ -1,0 +1,110 @@
+Metadata-Version: 2.2
+Name: signxai_torch
+Version: 0.1.0
+Summary: PyTorch implementation of SIGN-XAI with Zennit integration
+Home-page: https://github.com/your-username/signxai_torch
+Author: Original: Nils Gumpfer, PyTorch Port: Community
+Author-email: nils.gumpfer@kite.thm.de
+License: BSD-2-Clause
+Keywords: deep learning,pytorch,explainable ai,xai,interpretability
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: torch>=2.0.0
+Requires-Dist: zennit>=0.5.0
+Requires-Dist: numpy>=1.20.0
+Requires-Dist: matplotlib>=3.7.0
+Requires-Dist: scipy>=1.10.0
+Requires-Dist: pillow>=8.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0; extra == "dev"
+Requires-Dist: black>=22.0; extra == "dev"
+Requires-Dist: isort>=5.0; extra == "dev"
+Requires-Dist: mypy>=1.0; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=4.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0; extra == "docs"
+Requires-Dist: nbsphinx>=0.8; extra == "docs"
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: requires-python
+
+# SIGN-XAI PyTorch
+
+PyTorch implementation of the SIGN (SIGNed explanations) method with Zennit integration for explainable AI.
+
+## Installation
+
+```bash
+pip install signxai_torch
+
+For development installation:
+
+git clone https://github.com/your-username/signxai_torch.git
+cd signxai_torch
+pip install -e ".[dev]"
+
+Usage
+Basic usage example:
+
+import torch
+from signxai_torch.methods import SIGN
+
+# Load your PyTorch model
+model = ...  # Your PyTorch model
+model.eval()
+
+# Create SIGN analyzer
+sign = SIGN(model)
+
+# Prepare input
+input_tensor = ...  # Your input tensor
+
+# Get attributions
+attributions = sign.attribute(input_tensor)
+
+Using with specific target class:
+
+# Get attributions for class 5
+attributions = sign.attribute(input_tensor, target=5)
+
+Using integrated gradients variant:
+
+# Get integrated gradients attribution
+attributions = sign.get_integrated_gradients(
+    input_tensor,
+    steps=50,
+    baseline=torch.zeros_like(input_tensor)
+)
+
+Features
+PyTorch-native implementation
+Zennit integration for composite rules
+Support for batch processing
+Integrated Gradients variant
+Comprehensive test suite
+Compatible with modern PyTorch features
+Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+License
+This project is licensed under the BSD 2-Clause License - see the LICENSE file for details.
+
+Citation
+If you use this software in your research, please cite:
+
+@article{gumpfer2023sign,
+    title={SIGN: Unveiling relevant features by reducing bias},
+    author={Gumpfer, Nils},
+    journal={...},
+    year={2023}
+}
